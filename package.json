@@ -2,9 +2,10 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "Nguyen Nhu Khanh",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "start": "nodemon --inspect src/index.js",
+    "watch": "sass --watch src/resources/sass/app.sass src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,9 +25,12 @@
   },
   "homepage": "https://github.com/KWalkerNNK/nodejs_blog#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16",
+    "sass": "^1.52.3"
   }
 }
