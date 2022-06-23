@@ -2,9 +2,9 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "Nguyen Nhu Khanh",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
+    "start": "nodemon --inspect src/app.js",
     "watch": "sass --watch src/resources/sass/app.sass src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
