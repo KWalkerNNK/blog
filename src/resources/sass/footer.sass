@@ -1,0 +1,141 @@
+$color1: #26272b
+$color2: #737373
+$color3: #bbbbbb
+$color4: #ffffff
+$color5: #3366cc
+$color6: #33353d
+$color7: #96a2b2
+$color8: #eceeef
+$color9: #818a91
+$color10: #29aafe
+$color11: #3b5998
+$color12: #00aced
+$color13: #007bb6
+$color14: #ea4c89
+
+.site-footer 
+	background-color: @color1
+	padding: 45px 0 20px
+	font-size: 15px
+	line-height: 24px
+	color: @color2
+	hr 
+		border-top-color: @color3
+		opacity: 0.5
+		&.small 
+			margin: 20px 0
+		
+	
+	h6 
+		color: @color4
+		font-size: 16px
+		text-transform: uppercase
+		margin-top: 5px
+		letter-spacing: 2px
+	
+	a 
+		color: @color2
+		&:hover 
+			color: @color5
+			text-decoration: none
+		
+	
+	.social-icons 
+		text-align: right
+		a 
+			width: 40px
+			height: 40px
+			line-height: 40px
+			margin-left: 6px
+			margin-right: 0
+			border-radius: 100%
+			background-color: @color6
+		
+	
+	.copyright-text, .social-icons 
+		text-align: center
+	
+
+.footer-links 
+	padding-left: 0
+	list-style: none
+	li 
+		display: block
+	
+	a 
+		color: @color2
+		&:active, &:focus, &:hover 
+			color: @color5
+			text-decoration: none
+		
+	
+	&.inline li 
+		display: inline-block
+	
+
+.copyright-text 
+	margin: 0
+
+media (max-width:991px) 
+	margin-bottom: 30px
+
+media (max-width:767px) 
+	padding-bottom: 0
+
+.social-icons 
+	padding-left: 0
+	margin-bottom: 0
+	list-style: none
+	li 
+		display: inline-block
+		margin-bottom: 4px
+		&.title 
+			margin-right: 15px
+			text-transform: uppercase
+			color: @color7
+			font-weight: 700
+			font-size: 13px
+		
+	
+	a 
+		background-color: @color8
+		color: @color9
+		font-size: 16px
+		display: inline-block
+		line-height: 44px
+		width: 44px
+		height: 44px
+		text-align: center
+		margin-right: 8px
+		border-radius: 100%
+		-webkit-transition: all .2s linear
+		-o-transition: all .2s linear
+		transition: all .2s linear
+		&:active, &:focus, &:hover 
+			color: @color4
+			background-color: @color10
+		
+		&.facebook:hover 
+			background-color: @color11
+		
+		&.twitter:hover 
+			background-color: @color12
+		
+		&.linkedin:hover 
+			background-color: @color13
+		
+		&.dribbble:hover 
+			background-color: @color14
+		
+	
+	&.size-sm a 
+		line-height: 34px
+		height: 34px
+		width: 34px
+		font-size: 14px
+	
+
+media (max-width:767px) 
+	display: block
+	margin-right: 0
+	font-weight: 600

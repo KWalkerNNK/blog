@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const Songs = new Schema({
+const Song = new Schema({
     name: { type: String, maxLength: 255 },
     url: { type: String, maxLength: 255 },
     img: { type: String, maxLength: 255 },
@@ -11,4 +11,4 @@ const Songs = new Schema({
     updatedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Song', Songs);
+module.exports = mongoose.model('Song', Song);

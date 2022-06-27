@@ -1,14 +1,11 @@
 const Song = require('../models/Song');
 class SiteController {
     //GET /home
-    home(req, res) {
-        Song.find({}, function (err, songs) {
-            if (!err) {
-                res.json(songs);
-            } else {
-                res.status(400).json({ error: 'Error' });
-            }
-        });
+    home(req, res, next) {
+        Song.find({})
+            .lean()
+            .then((songs) => res.render('home', { songs }))
+            .catch(next);
         // res.render('home');
     }
 
