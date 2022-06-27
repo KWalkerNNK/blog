@@ -7,8 +7,7 @@ const Song = new Schema({
     url: { type: String, maxLength: 255 },
     img: { type: String, maxLength: 255 },
     author: { type: String, maxLength: 70 },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+    slug: { type: String, maxLength: 255},
 });
 
 module.exports = mongoose.model('Song', Song);

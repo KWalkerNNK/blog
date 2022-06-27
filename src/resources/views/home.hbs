@@ -3,10 +3,14 @@
         {{#each songs}}
         <div class="col-sm-6 col-lg-3">
             <div class="card sm mt-3">
-                <img src="{{this.img}}" class="card-img-top" alt="{{this.name}}">
+                <a href="./movies/{{this.slug}}">
+                    <img src="{{this.img}}" class="card-img-top" alt="{{this.name}}">
+                </a>
                 <div class="card-body">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <p class="card-text">{{this.author}}</p>
+                    <a href="./movies/{{this.slug}}" class="text-decoration-none">
+                        <h5 class="card-title text-capitalize text-dark">{{this.name}}</h5>
+                    </a>
+                    <p class="card-text text-capitalize">{{this.author}}</p>
                     <a href="#" class="btn btn-outline-info">Sub</a>
                 </div>
             </div>

@@ -1,0 +1,17 @@
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-success">Success</button>
+        </div>
+        <div class="col-lg-9">
+            {{#with song}}
+            <h2>{{this.name}}</h2>
+            <iframe class="w-100 p-3" height="500px" src="https://www.youtube.com/embed/{{this.url}}" title="{{this.name}}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            <p>{{this.author}}</p>
+            {{/with}}
+        </div>
+    </div>
+</div>
