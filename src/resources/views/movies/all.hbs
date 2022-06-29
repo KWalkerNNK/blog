@@ -16,9 +16,45 @@
                 <td>{{this.url}}</td>
                 <td>{{this.author}}</td>
                 <td><a href="/movies/{{this.slug}}/edit" class="btn btn-info">Sửa</a></td>
-                <td><a href="/movies/{{this.slug}}/remove" class="btn btn-danger">Xoá</a></td>
+                <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteleModal"
+                        data-bs-slug="{{this.slug}}">Xoá</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+{{!-- Modal --}}
+<div class="modal fade" id="deleteleModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn vẫn tiếp tục xoá ?
+            </div>
+            <div class="modal-footer">
+                <a id="deleteBtn" type="button" class="btn btn-danger">Xoá</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let slug
+        const deleteleModal = document.getElementById('deleteleModal')
+        deleteleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget
+            slug = button.getAttribute('data-bs-slug')
+        })
+        const deleteBtn = document.getElementById('deleteBtn')
+        deleteBtn.onclick = () => {
+            deleteBtn.setAttribute('href', `/movies/${slug}/remove?method=delete`)
+        }
+    })
+</script>

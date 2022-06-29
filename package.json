@@ -4,7 +4,7 @@
   "description": "Nguyen Nhu Khanh",
   "main": "src/app.js",
   "scripts": {
-    "nnk": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json}",
+    "nnk": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,html}",
     "start": "nodemon --inspect src/app.js",
     "watch": "sass --watch src/resources/sass/app.sass src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"

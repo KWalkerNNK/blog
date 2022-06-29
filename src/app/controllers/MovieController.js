@@ -41,8 +41,17 @@ class MovieController {
 
     //put /movies/:slug
     update(req, res, next) {
-        Song.updateOne({ slug: req.params.slug }, req.body)
+        const formData = req.body;
+        formData.img = `http://img.youtube.com/vi/${formData.url}/sddefault.jpg`;
+        Song.updateOne({ slug: req.params.slug }, formData)
             .then(() => res.redirect('/movies/all'))
+            .catch(next);
+    }
+
+    //delete /movies/:slug/remove
+    remove(req, res, next) {
+        Song.deleteOne({ slug: req.params.slug })
+            .then(() => res.redirect('back'))
             .catch(next);
     }
 }
