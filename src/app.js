@@ -6,12 +6,17 @@ const path = require('path');
 const route = require('./routes/index');
 const db = require('./config/database/connect');
 
+//Ghi đè phương thức post sang put ....
+const methodOverride = require('method-override')
+
 //Connect Database
 db.connect();
 
 const app = express();
 const port = 3000;
 
+//sử dụng ghi đè phương thức
+app.use(methodOverride('method'))
 //Hiển thị ảnh
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,6 +33,9 @@ app.engine(
     engine({
         //Mở rộng tên
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        }
     }),
 );
 app.set('view engine', 'hbs');

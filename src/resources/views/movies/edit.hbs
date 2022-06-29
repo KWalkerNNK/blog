@@ -1,0 +1,20 @@
+<div class="container mt-4 mb-4">
+    {{#with song}}
+    <form action="/movies/{{this.slug}}/update?method=put" method="post">
+        <div class="mb-3">
+            <label for="nameVideo" class="form-label">Tên Video</label>
+            <input name="name" type="text" class="form-control" placeholder="Hãy điền tên video bạn muốn"
+                value="{{this.name}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">URL Video</label>
+            <textarea name="url" class="form-control" id="exampleFormControlTextarea1" rows="3">{{this.url}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Tác Giả</label>
+            <input name="author" type="text" class="form-control" value="{{this.author}}">
+        </div>
+        <button class="btn btn-success" type="submit">Sửa</button>
+    </form>
+    {{/with}}
+</div>
