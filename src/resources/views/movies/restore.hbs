@@ -1,7 +1,7 @@
 <div class="container mt-4 mb-4">
     <div class="row">
-        <h2>Danh Sách</h2>
-        <a href="/movies/restore"><i class="bi bi-trash">Thùng Rác</i></a>
+        <h2>Danh Sách Đã Xoá</h2>
+        <a href="/movies/all"><i class="bi bi-trash">Quay Lại</i></a>
     </div>
     <div class="row">
         <table class="table table-hover">
@@ -20,7 +20,7 @@
                     <td>{{this.name}}</td>
                     <td>{{this.url}}</td>
                     <td>{{this.author}}</td>
-                    <td><a href="/movies/{{this.slug}}/edit" class="btn btn-info">Sửa</a></td>
+                    <td><a href="/movies/{{this.slug}}/restore" class="btn btn-success">Khôi Phục</a></td>
                     <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteleModal"
                             data-bs-slug="{{this.slug}}">Xoá</button></td>
                 </tr>
@@ -39,10 +39,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bạn vẫn tiếp tục xoá ?
+                Điều này sẽ xoá vĩnh viễn Video này. Bạn chắc chứ ?
             </div>
             <div class="modal-footer">
-                <a id="deleteBtn" type="button" class="btn btn-danger">Xoá</a>
+                <a id="deleteBtn" type="button" class="btn btn-danger">Xoá Vĩnh Viễn</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
             </div>
         </div>
@@ -60,7 +60,7 @@
         })
         const deleteBtn = document.getElementById('deleteBtn')
         deleteBtn.onclick = () => {
-            deleteBtn.setAttribute('href', `/movies/${slug}/remove?method=delete`)
+            deleteBtn.setAttribute('href', `/movies/${slug}/destroy?method=delete`)
         }
     })
 </script>

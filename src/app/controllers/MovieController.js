@@ -48,9 +48,31 @@ class MovieController {
             .catch(next);
     }
 
-    //delete /movies/:slug/remove
+    //delete /movies/:slug/remove // Xoá mềm
     remove(req, res, next) {
+        Song.delete({ slug: req.params.slug })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    //get /movies/restore
+    restore(req, res, next) {
+        Song.findDeleted()
+            .lean()
+            .then((song) => res.render('movies/restore', { song }))
+            .catch(next);
+    }
+
+    //delete /movies/:slug/destroy
+    destroy(req, res, next) {
         Song.deleteOne({ slug: req.params.slug })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    //post /movies/:slug/restore
+    readyToRestore(req, res, next) {
+        Song.restore({ slug: req.params.slug })
             .then(() => res.redirect('back'))
             .catch(next);
     }
