@@ -19,16 +19,19 @@ class MovieController {
         formData.img = `http://img.youtube.com/vi/${formData.url}/sddefault.jpg`;
         const song = new Song(formData);
         song.save()
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/movies/all'))
             .catch(next);
     }
 
-    //get /movies/all
-    all(req, res, next) {
-        Song.find()
-            .lean()
-            .then((song) => res.render('movies/all', { song }))
-            .catch(next);
+    //get /movies/all ..Đếm các bản ghi đã xoá mềm
+    async all(req, res, next) {
+        try {
+            const song = await Song.find().lean();
+            const countDocumentsDeleted = await Song.countDocumentsDeleted();
+            res.render('movies/all', { song, countDocumentsDeleted });
+        } catch (err) {
+            next(err);
+        }
     }
 
     //get /movies/:slug/edit

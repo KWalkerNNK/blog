@@ -1,9 +1,10 @@
 <div class="container mt-4 mb-4">
     <div class="row">
         <h2>Danh Sách</h2>
-        <a href="/movies/restore"><i class="bi bi-trash">Thùng Rác</i></a>
+        <a href="/movies/restore"><i class="bi bi-trash">Thùng Rác ({{countDocumentsDeleted}})</i></a>
     </div>
     <div class="row">
+        {{#if song}}
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -27,6 +28,11 @@
                 {{/each}}
             </tbody>
         </table>
+        {{else}}
+        <div class="alert alert-danger mt-2" role="alert">
+            Hãy thêm một Video mới !
+        </div>
+        {{/if}}
     </div>
 </div>
 
