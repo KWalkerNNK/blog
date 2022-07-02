@@ -1,39 +1,62 @@
 <div class="container mt-4 mb-4">
-    <div class="row">
-        <h2>Danh Sách</h2>
-        <a href="/movies/restore"><i class="bi bi-trash">Thùng Rác ({{countDocumentsDeleted}})</i></a>
-    </div>
-    <div class="row">
-        {{#if song}}
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">URL Video</th>
-                    <th scope="col" colspan="3">Tác Giả</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each song}}
-                <tr>
-                    <th scope="row">{{sum @key 1}}</th>
-                    <td>{{this.name}}</td>
-                    <td>{{this.url}}</td>
-                    <td>{{this.author}}</td>
-                    <td><a href="/movies/{{this.slug}}/edit" class="btn btn-info">Sửa</a></td>
-                    <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteleModal"
-                            data-bs-slug="{{this.slug}}">Xoá</button></td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-        {{else}}
-        <div class="alert alert-danger mt-2" role="alert">
-            Hãy thêm một Video mới !
+    <form id="containerForm" action="/movies/handelsForm" method="post">
+        <div class="row">
+            <h2>Danh Sách</h2>
+            <a href="/movies/restore">
+                <button type="button" class="btn btn-outline-warning bi bi-trash position-relative">
+                    Thùng Rác <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{{countDocumentsDeleted}}
+                        <span class="visually-hidden">Trống</span></span>
+                </button>
+            </a>
         </div>
-        {{/if}}
-    </div>
+        <div class=" mt-4 mb-4 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkBoxAll">
+                <label class="form-check-label" for="checkBoxAll">
+                    Chọn tất cả
+                </label>
+            </div>
+            <select class="form-select form-select-sm" aria-label="Chọn hành động" style="width: 170px; margin: 0 16px"
+                required name="action">
+                <option value="">-- Chọn hành động --</option>
+                <option value="delete">Xoá</option>
+            </select>
+            <button id="btnSelectAll" type="submit" class="btn btn-outline-danger btn-sm" disabled>Thực hiện</button>
+        </div>
+        <div class="table-responsive">
+            {{#if song}}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="2">#</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">URL</th>
+                        <th scope="col" colspan="3">Tác Giả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each song}}
+                    <tr>
+                        <th><input class="form-check-input" type="checkbox" name="nnk" value="{{this.slug}}" id="checkBox"></th>
+                        <th scope="row">{{sum @key 1}}</th>
+                        <td>{{this.name}}</td>
+                        <td>{{this.url}}</td>
+                        <td>{{this.author}}</td>
+                        <td><a href="/movies/{{this.slug}}/edit" class="btn btn-info">Sửa</a></td>
+                        <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteleModal"
+                                data-bs-slug="{{this.slug}}">Xoá</button></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <div class="alert alert-danger mt-2" role="alert">
+                Hãy thêm một Video mới !
+            </div>
+            {{/if}}
+        </div>
+    </form>
 </div>
 
 {{!-- Modal --}}
@@ -58,15 +81,52 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let slug
-        const deleteleModal = document.getElementById('deleteleModal')
+        let slug;
+        const deleteleModal = document.getElementById('deleteleModal');
         deleteleModal.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget
+            const button = event.relatedTarget;
             slug = button.getAttribute('data-bs-slug')
         })
-        const deleteBtn = document.getElementById('deleteBtn')
+        const deleteBtn = document.getElementById('deleteBtn');
         deleteBtn.onclick = () => {
-            deleteBtn.setAttribute('href', `/movies/${slug}/remove?method=delete`)
+            deleteBtn.setAttribute('href', `/movies/${slug}/remove?method=delete`);
         }
     })
+</script>
+
+<script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+    const btnSelectAll = $('#btnSelectAll');
+    const checkBoxAll = $('#checkBoxAll');
+    const checkBox = $$('#checkBox');
+    const containerForm = $('#containerForm')
+    var i = 0;
+
+    //Select all checkboxes on click
+    checkBoxAll.onchange = function () {
+        var isCheckedAll = this.checked;
+        for (var checkbox of checkBox) {
+            checkbox.checked = isCheckedAll;
+            isCheckedAll ? i = checkBox.length : i = 0;
+            deleteDisabled(i)
+        }
+    }
+
+    //Select the checkboxes in turn
+    for (var checkbox of checkBox) {
+        checkbox.onchange = function () {
+            var isCheckedAll = this.checked;
+            isCheckedAll ? i++ : i--;
+            isCheckedAll = i === checkBox.length;
+            checkBoxAll.checked = isCheckedAll;
+            deleteDisabled(i);
+        }
+    }
+
+    // Add or remove disabled
+    function deleteDisabled(i) {
+        i > 0 ? btnSelectAll.removeAttribute('disabled') : btnSelectAll.setAttribute('disabled', false);
+    }
+
 </script>

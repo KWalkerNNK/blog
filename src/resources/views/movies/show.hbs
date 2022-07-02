@@ -6,10 +6,10 @@
         <div class="col-lg-9">
             {{#with song}}
             <h2>{{this.name}}</h2>
-            <iframe class="mw-100 mh-100" height="500" width="889px" src="https://www.youtube.com/embed/{{this.url}}" title="{{this.name}}"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/{{this.url}}" title="{{this.name}}"
+                    allowfullscreen></iframe>
+            </div>
             <p>{{this.author}}</p>
             {{/with}}
         </div>

@@ -79,5 +79,18 @@ class MovieController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
+
+    //post /movies/handelsForm //DELETE ALL
+    handelsForm(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Song.delete({ slug: { $in: req.body.nnk } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                req.json(next);
+        }
+    }
 }
 module.exports = new MovieController();
