@@ -3,7 +3,7 @@
         <div class="row">
             <h2>Danh Sách</h2>
             <a href="/movies/restore">
-                <button type="button" class="btn btn-outline-warning bi bi-trash position-relative">
+                <button type="button" class="btn btn-outline-warning bi bi-recycle position-relative">
                     Thùng Rác <span
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{{countDocumentsDeleted}}
                         <span class="visually-hidden">Trống</span></span>
@@ -30,7 +30,10 @@
                 <thead>
                     <tr>
                         <th scope="col" colspan="2">#</th>
-                        <th scope="col">Tên</th>
+                        <th scope="col">Tên&nbsp; <a href="?_sort&column=name&type=desc">
+                                <i class="bi bi-arrow-down-up text-dark"></i>
+                            </a>
+                        </th>
                         <th scope="col">URL</th>
                         <th scope="col" colspan="3">Tác Giả</th>
                     </tr>
@@ -38,7 +41,8 @@
                 <tbody>
                     {{#each song}}
                     <tr>
-                        <th><input class="form-check-input" type="checkbox" name="nnk" value="{{this.slug}}" id="checkBox"></th>
+                        <th><input class="form-check-input" type="checkbox" name="nnk" value="{{this.slug}}"
+                                id="checkBox"></th>
                         <th scope="row">{{sum @key 1}}</th>
                         <td>{{this.name}}</td>
                         <td>{{this.url}}</td>

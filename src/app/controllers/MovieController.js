@@ -26,7 +26,12 @@ class MovieController {
     //get /movies/all ..Đếm các bản ghi đã xoá mềm
     async all(req, res, next) {
         try {
-            const song = await Song.find().lean();
+            let song = await Song.find().lean();
+
+            if (req.query.hasOwnProperty('_sort')) {
+                song = await Song.find().lean().sort({ [req.query.column]: req.query.type })
+            };
+
             const countDocumentsDeleted = await Song.countDocumentsDeleted();
             res.render('movies/all', { song, countDocumentsDeleted });
         } catch (err) {
