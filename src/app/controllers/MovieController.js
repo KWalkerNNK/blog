@@ -29,8 +29,10 @@ class MovieController {
             let song = await Song.find().lean();
 
             if (req.query.hasOwnProperty('_sort')) {
-                song = await Song.find().lean().sort({ [req.query.column]: req.query.type })
-            };
+                song = await Song.find()
+                    .lean()
+                    .sort({ [req.query.column]: req.query.type });
+            }
 
             const countDocumentsDeleted = await Song.countDocumentsDeleted();
             res.render('movies/all', { song, countDocumentsDeleted });

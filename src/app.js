@@ -5,6 +5,7 @@ const path = require('path');
 
 const route = require('./routes/index');
 const db = require('./config/database/connect');
+const SortMiddleware = require('./app/middleware/SortMiddleware');
 
 //Ghi đè phương thức post sang put ....
 const methodOverride = require('method-override');
@@ -17,6 +18,10 @@ const port = 3000;
 
 //sử dụng ghi đè phương thức
 app.use(methodOverride('method'));
+
+//Custom SortMiddleware
+app.use(SortMiddleware);
+
 //Hiển thị ảnh
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,6 +40,24 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : 'default';
+                const icons = {
+                    default: 'bi-arrow-down-up',
+                    asc: 'bi-sort-down-alt',
+                    desc: 'bi-sort-down',
+                };
+                const types = {
+                    default: 'asc',
+                    asc: 'desc',
+                    desc: 'asc',
+                };
+                const type = types[sortType];
+                const icon = icons[sortType];
+                return `<a href="?_sort&column=${field}&type=${type}">
+                <i class="bi ${icon}"></i>
+            </a>`;
+            },
         },
     }),
 );

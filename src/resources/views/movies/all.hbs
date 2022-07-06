@@ -30,12 +30,18 @@
                 <thead>
                     <tr>
                         <th scope="col" colspan="2">#</th>
-                        <th scope="col">Tên&nbsp; <a href="?_sort&column=name&type=desc">
-                                <i class="bi bi-arrow-down-up text-dark"></i>
-                            </a>
+                        <th scope="col">Tên
+                            &nbsp;
+                            {{{sortable 'name' _sort}}}
                         </th>
-                        <th scope="col">URL</th>
-                        <th scope="col" colspan="3">Tác Giả</th>
+                        <th scope="col">URL
+                            &nbsp;
+                            {{{sortable 'url' _sort}}}
+                        </th>
+                        <th scope="col" colspan="3">Tác Giả
+                            &nbsp;
+                            {{{sortable 'author' _sort}}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
